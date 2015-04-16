@@ -1,27 +1,41 @@
 #!/bin/bash
 
-combo=()
-combo+=('home' 'cd ~; clear; pwd')
-combo+=('logs' 'cd /var/log; clear; pwd')
+if [ -r config ]; then
+    echo ""
+    echo "Loading custom file"
+    . config
+else
+    . config.dist
+fi
 
 tmux start-server
 
 window=0
 windownumber=-1
+
 for i in "${combo[@]}"; do
 
-    if [ $((window%2)) == 0 ];
-    then name=${i}; $((windownumber=windownumber+1))
-    else command=${i}; fi
+    if [ $((window%2)) == 0 ]; then
+        name=${i}
+        ((windownumber++))
+    else
+        command=${i}
+    fi
 
-    if [ ${combo[0]} == "${i}" ];
-    then tmux new-session -d -s Onebip -n "${name}";
-    else if [ $((window%2)) == 0 ]; then tmux new-window -tOnebip:$windownumber -n "${name}"; fi fi
+    if [ ${combo[0]} == "${i}" ]; then
+        tmux new-session -d -s StarTmux -n "${name}"
+    else
+        if [ $((window%2)) == 0 ]; then
+            tmux new-window -tStarTmux:$windownumber -n "${name}"
+        fi
+    fi
 
-    if [ $((window%2)) == 1 ]; then tmux send-keys -tOnebip:$windownumber "${command}" C-m; fi
+    if [ $((window%2)) == 1 ]; then
+        tmux send-keys -tStarTmux:$windownumber "${command}" C-m
+    fi
 
-    $((window=window+1))
+    ((window++))
 done
 
-tmux select-window -tOnebip:0
-tmux attach-session -d -tOnebip
+tmux select-window -tStarTmux:0
+tmux attach-session -d -tStarTmux
