@@ -1,0 +1,27 @@
+#!/bin/bash
+
+combo=()
+combo+=('home' 'cd ~; clear; pwd')
+combo+=('logs' 'cd /var/log; clear; pwd')
+
+tmux start-server
+
+window=0
+windownumber=-1
+for i in "${combo[@]}"; do
+
+    if [ $((window%2)) == 0 ];
+    then name=${i}; $((windownumber=windownumber+1))
+    else command=${i}; fi
+
+    if [ ${combo[0]} == "${i}" ];
+    then tmux new-session -d -s Onebip -n "${name}";
+    else if [ $((window%2)) == 0 ]; then tmux new-window -tOnebip:$windownumber -n "${name}"; fi fi
+
+    if [ $((window%2)) == 1 ]; then tmux send-keys -tOnebip:$windownumber "${command}" C-m; fi
+
+    $((window=window+1))
+done
+
+tmux select-window -tOnebip:0
+tmux attach-session -d -tOnebip
