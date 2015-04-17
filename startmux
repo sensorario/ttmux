@@ -5,7 +5,7 @@ if [ -r config ]; then
     echo "Loading custom file"
     . config
 else
-    . config.dist
+    . config.startmux
 fi
 
 tmux start-server
