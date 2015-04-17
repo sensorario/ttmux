@@ -15,33 +15,17 @@ do
 done
 
 tmux start-server
-
-window=0
-windownumber=-1
-
-for i in "${combo[@]}"; do
-
-    if [ $((window%2)) == 0 ]; then
-        name=${i}
-        ((windownumber++))
+windownumber=0
+for window in ${!combo[@]}; do
+    name=${window}
+    command=${combo[$window]}
+    if [ $((windownumber%2)) == 0 ]; then
+        tmux new-session -d -s startmux -n "${name}"
     else
-        command=${i}
+        tmux new-window -tstartmux:$windownumber -n "${name}"
     fi
-
-    if [ ${combo[0]} == "${i}" ]; then
-        tmux new-session -d -s StarTmux -n "${name}"
-    else
-        if [ $((window%2)) == 0 ]; then
-            tmux new-window -tStarTmux:$windownumber -n "${name}"
-        fi
-    fi
-
-    if [ $((window%2)) == 1 ]; then
-        tmux send-keys -tStarTmux:$windownumber "${command}" C-m
-    fi
-
-    ((window++))
+    tmux send-keys -tstartmux:$windownumber "${command}" C-m
+    ((windownumber++))
 done
-
-tmux select-window -tStarTmux:0
-tmux attach-session -d -tStarTmux
+tmux select-window -tstartmux:0
+tmux attach-session -d -tstartmux
