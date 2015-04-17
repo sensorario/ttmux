@@ -1,12 +1,18 @@
 #!/bin/bash
 
-if [ -r config ]; then
-    echo ""
-    echo "Loading custom file"
-    . config
-else
-    . config.startmux
-fi
+select filename in `ls *.startmux`
+do
+    echo $filename
+    if [ -f "$filename" ]; then
+        echo ""
+        echo "Loading $filename file"
+        . $filename
+        break
+    else
+        echo ""
+        echo "Invalid selection"
+    fi
+done
 
 tmux start-server
 

@@ -1,9 +1,10 @@
 # startmux
+
 A script that make easy tmux configuration bootstrap of a project
 
 ## Add your own custom configuration
 
-This scripts, by default, loads config.dist file. If you want to load your custom configuration, just create a file named `config`. To do this, just copy config.dist file, renaming the copy `config`.
+To add a custom configuration, it's necessary to create a file with extension .startmux. When loaded, startmux select the right file by asking which one the user want to load.
 
 ## Example
 
