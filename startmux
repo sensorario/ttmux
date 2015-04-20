@@ -1,4 +1,21 @@
 #!/bin/bash
+clear
+
+
+echo "Defining colors ..."
+information=`tput setaf 2`
+question=`tput setaf 3`
+alert=`tput setaf 1`
+reset=`tput sgr0`
+echo "${information}Colors defined ...${reset}"
+
+
+echo "${information}Retrieving local information ...${reset}"
+`ls *.startmux` | grep cannot &> /dev/null
+if [ $? == 1 ]; then
+    echo "${alert}There are not configuration files in $PWD folder${reset}"
+    exit
+fi
 
 select filename in `ls *.startmux`
 do
