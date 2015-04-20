@@ -1,6 +1,35 @@
 #!/bin/bash
+clear
+
+
+echo "Defining colors ..."
+information=`tput setaf 2`
+question=`tput setaf 3`
+alert=`tput setaf 1`
+reset=`tput sgr0`
+echo "${information}Colors defined ...${reset}"
+
+
+echo "${information}Retrieving local information ...${reset}"
+if [[ -n $(which tmux) ]]; then
+    echo "${information}Tmux is installed in your system${reset}"
+else
+    echo "${alert}Tmux is not installed${reset}"
+    echo "${information}run apt-get install tmux${reset}"
+    exit
+fi
+
+
+echo "${information}Retrieving local information ...${reset}"
+`ls *.startmux` | grep cannot &> /dev/null
+if [ $? == 1 ]; then
+    echo "${alert}There are not configuration files in $PWD folder${reset}"
+    exit
+fi
+
 
 # Select configuration from filenames
+echo "${information}Select your configuration file here${reset}"
 select filename in `ls *.startmux`
 do
     echo $filename
@@ -15,12 +44,14 @@ do
     fi
 done
 
+
 # Check if configuration must follow a precise order or not
 if [ -z "$order" ]; then
     echo "Order is not configured by user"
 else
     echo "Order is configured by user"
 fi
+
 
 # Generate windows
 tmux start-server
