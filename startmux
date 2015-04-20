@@ -11,6 +11,15 @@ echo "${information}Colors defined ...${reset}"
 
 
 echo "${information}Retrieving local information ...${reset}"
+`tmux --help` | grep apt &> /dev/null
+if [ $? == 1 ]; then
+    echo "${alert}tmux is not installed${reset}"
+    echo "${information}Install tmux${reset}"
+    exit
+fi
+
+
+echo "${information}Retrieving local information ...${reset}"
 `ls *.startmux` | grep cannot &> /dev/null
 if [ $? == 1 ]; then
     echo "${alert}There are not configuration files in $PWD folder${reset}"
