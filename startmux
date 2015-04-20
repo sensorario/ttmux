@@ -11,10 +11,11 @@ echo "${information}Colors defined ...${reset}"
 
 
 echo "${information}Retrieving local information ...${reset}"
-`tmux --help` | grep apt &> /dev/null
-if [ $? == 1 ]; then
-    echo "${alert}tmux is not installed${reset}"
-    echo "${information}Install tmux${reset}"
+if [[ -n $(which tmux) ]]; then
+    echo "${information}Tmux is installed in your system${reset}"
+else
+    echo "${alert}Tmux is not installed${reset}"
+    echo "${information}run apt-get install tmux${reset}"
     exit
 fi
 
@@ -26,6 +27,8 @@ if [ $? == 1 ]; then
     exit
 fi
 
+
+echo "${information}Select your configuration file here${reset}"
 select filename in `ls *.startmux`
 do
     echo $filename
