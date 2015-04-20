@@ -14,3 +14,9 @@ Here an example. Windows will be opened with the order in the list. `first` para
     declare -A combo=()
     combo+=(['home']='cd ~')
     combo+=(['logs']='cd /var/log')
+
+## Execute tmux from everywhere
+
+To make startmux executable from everywhere, add a symbolic link your /usr/bin folder
+
+    # ln -s ./startmux/startmux /usr/bin/
