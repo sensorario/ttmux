@@ -17,9 +17,9 @@ done
 
 # Check if configuration must follow a precise order or not
 if [ -z "$order" ]; then
-    echo "var is unset"
+    echo "Order is not configured by user"
 else
-    echo "var is set to '$var'"
+    echo "Order is configured by user"
 fi
 
 # Generate windows
