@@ -17,6 +17,6 @@ Here an example. Windows will be opened with the order in the list. `first` para
 
 ## Execute tmux from everywhere
 
-To make startmux executable from everywhere, add a symbolic link your /usr/bin folder
+To make startmux executable from everywhere, add a symbolic link your /usr/local/bin folder
 
-    # ln -s ./startmux/startmux /usr/bin/
+    # ln -s ./startmux/startmux /usr/local/bin/
