@@ -19,7 +19,7 @@ windownumber=0
 for window in ${!combo[@]}; do
     name=${window}
     command=${combo[$window]}
-    if [ $((windownumber%2)) == 0 ]; then
+    if [ $((windownumber)) == 0 ]; then
         tmux new-session -d -s startmux -n "${name}"
     else
         tmux new-window -tstartmux:$windownumber -n "${name}"
