@@ -43,6 +43,7 @@ do
     fi
 done
 
+
 tmux start-server
 windownumber=0
 for window in ${!combo[@]}; do
