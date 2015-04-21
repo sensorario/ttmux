@@ -37,3 +37,9 @@ To make startmux executable from everywhere, add a symbolic link your /usr/local
 
     # cd /usr/local/bin
     # ln -s ~/path/to/sensorario/startmux/startmux .
+
+## Run command with configuration file
+
+There is also possibility to run startmux with configuration file as parameter
+
+    $ startmux filename.startmux
