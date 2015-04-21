@@ -16,8 +16,8 @@ Here an example. Windows will be opened with the order in the list. `first` para
 
     #!/bin/bash
     declare -A combo=()
-    combo+=(['home']='cd ~')
-    combo+=(['logs']='cd /var/log')
+    combo+=([home]='cd ~')
+    combo+=([logs]='cd /var/log')
 
 ## Windows order
 
@@ -27,8 +27,8 @@ Associative array, in bash, are not ordered. To customize the order of windows, 
     echo ""
     echo "You are loading default configuration"
     declare -A combo=()
-    combo+=(['logs']='cd /var/log; clear; pwd')
-    combo+=(['home']='cd ~; clear; pwd')
+    combo+=([logs]='cd /var/log; clear; pwd')
+    combo+=([home]='cd ~; clear; pwd')
     order=(home logs)
 
 ## Execute tmux from everywhere
