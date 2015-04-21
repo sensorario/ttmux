@@ -19,6 +19,18 @@ Here an example. Windows will be opened with the order in the list. `first` para
     combo+=(['home']='cd ~')
     combo+=(['logs']='cd /var/log')
 
+## Windows order
+
+Associative array, in bash, are not ordered. To customize the order of windows, add another array to configuration like this:
+
+    #!/bin/bash
+    echo ""
+    echo "You are loading default configuration"
+    declare -A combo=()
+    combo+=(['logs']='cd /var/log; clear; pwd')
+    combo+=(['home']='cd ~; clear; pwd')
+    order=(home logs)
+
 ## Execute tmux from everywhere
 
 To make startmux executable from everywhere, add a symbolic link your /usr/local/bin folder
