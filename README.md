@@ -6,6 +6,10 @@ A script that make easy tmux configuration bootstrap of a project
 
 To add a custom configuration, it's necessary to create a file with extension .startmux. When loaded, startmux select the right file by asking which one the user want to load.
 
+## Order your windows
+
+Associative arrays, in bash, are not sortable.
+
 ## Example
 
 Here an example. Windows will be opened with the order in the list. `first` parameter, is the name of the window. `second` parameter, is the command appended on that window.
