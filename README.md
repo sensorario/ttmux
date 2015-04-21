@@ -19,4 +19,5 @@ Here an example. Windows will be opened with the order in the list. `first` para
 
 To make startmux executable from everywhere, add a symbolic link your /usr/local/bin folder
 
-    # ln -s ./startmux/startmux /usr/local/bin/
+    # cd /usr/local/bin
+    # ln -s ~/path/to/sensorario/startmux/startmux .
