@@ -6,3 +6,5 @@ echo "You are loading default configuration"
 declare -A combo=()
 combo+=(['logs']='cd /var/log; clear; pwd')
 combo+=(['home']='cd ~; clear; pwd')
+
+order=(home logs)
