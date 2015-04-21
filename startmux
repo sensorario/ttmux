@@ -20,29 +20,35 @@ else
 fi
 
 
-echo "${information}Retrieving local information ...${reset}"
-if [[ -n $(ls *.startmux) ]]; then
-    echo "${information}Configuration files found${reset}"
+
+
+if [ -f "$1" ]; then
+    echo "${information}Configuration sent via parameters${reset}"
+    . "$1"
 else
-    echo "${alert}No configuration available in folder $PWD${reset}"
-    exit
-fi
-
-
-echo "${information}Select your configuration file here${reset}"
-select filename in `ls *.startmux`
-do
-    echo $filename
-    if [ -f "$filename" ]; then
-        echo ""
-        echo "Loading $filename file"
-        . $filename
-        break
+    echo "${information}Retrieving local information ...${reset}"
+    if [[ -n $(ls *.startmux) ]]; then
+        echo "${information}Configuration files found${reset}"
     else
-        echo ""
-        echo "Invalid selection"
+        echo "${alert}No configuration available in folder $PWD${reset}"
+        exit
     fi
-done
+
+    echo "${information}Select your configuration file here${reset}"
+    select filename in `ls *.startmux`
+    do
+        echo $filename
+        if [ -f "$filename" ]; then
+            echo ""
+            echo "Loading $filename file"
+            . $filename
+            break
+        else
+            echo ""
+            echo "Invalid selection"
+        fi
+    done
+fi
 
 
 tmux start-server
