@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo ""
+echo "Check tmux installation"
+
+function check_tmux_installation {
+    echo "${information}Retrieving local information ...${reset}"
+    if [[ -n $(which tmux) ]]; then
+        echo "${information}Tmux is installed in your system${reset}"
+    else
+        echo "${alert}Tmux is not installed${reset}"
+        echo "${information}run apt-get install tmux${reset}"
+        exit
+    fi
+}
+
+check_tmux_installation
