@@ -1,0 +1,64 @@
+#!/bin/bash
+clear
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+    TARGET="$(readlink "$SOURCE")"
+    if [[ $SOURCE == /* ]]; then
+        SOURCE="$TARGET"
+    else
+        ttmux="$( dirname "$SOURCE" )"
+        SOURCE="$ttmux/$TARGET"
+    fi
+done
+RDIR="$( dirname "$SOURCE" )"
+ttmux="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+. $ttmux/"lib/colors"
+. $ttmux/"lib/check_tmux_installation"
+
+if [ -f "$1" ]; then
+    echo "${information}Configuration sent via parameters${reset}"
+    . "$1"
+else
+    echo "${information}Retrieving local information ...${reset}"
+    if [[ -n $(ls *.ttmux) ]]; then
+        echo "${information}Configuration files found${reset}"
+    else
+        echo "${alert}No configuration available in folder $PWD${reset}"
+        exit
+    fi
+
+    echo "${information}Select your configuration file here${reset}"
+    select filename in `ls *.ttmux`
+    do
+        echo $filename
+        if [ -f "$filename" ]; then
+            echo ""
+            echo "Loading $filename file"
+            . $filename
+            break
+        else
+            echo ""
+            echo "Invalid selection"
+        fi
+    done
+fi
+
+
+tmux start-server
+windownumber=0
+if [ -z "$order" ]; then windows=${!combo[@]}; else windows=${order[@]}; fi
+for window in $windows; do
+    name=${window}
+    command=${combo[$window]}
+    if [ $((windownumber)) == 0 ]; then
+        tmux new-session -d -s startmux -n "${name}"
+    else
+        tmux new-window -tstartmux:$windownumber -n "${name}"
+    fi
+    tmux send-keys -tstartmux:$windownumber "${command}" C-m
+    ((windownumber++))
+done
+tmux select-window -tstartmux:0
+tmux attach-session -d -tstartmux
