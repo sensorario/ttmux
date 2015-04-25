@@ -1,10 +1,10 @@
-# startmux
+# ttmux
 
 A script that make easy tmux configuration bootstrap of a project
 
 ## Add your own custom configuration
 
-To add a custom configuration, it's necessary to create a file with extension .startmux. When loaded, startmux select the right file by asking which one the user want to load.
+To add a custom configuration, it's necessary to create a file with extension .ttmux. When loaded, ttmux select the right file by asking which one the user want to load.
 
 ## Order your windows
 
@@ -33,13 +33,13 @@ Associative array, in bash, are not ordered. To customize the order of windows, 
 
 ## Execute tmux from everywhere
 
-To make startmux executable from everywhere, add a symbolic link your /usr/local/bin folder
+To make ttmux executable from everywhere, add a symbolic link your /usr/local/bin folder
 
     # cd /usr/local/bin
-    # ln -s ~/path/to/sensorario/startmux/startmux .
+    # ln -s ~/path/to/sensorario/ttmux/ttmux .
 
 ## Run command with configuration file
 
-There is also possibility to run startmux with configuration file as parameter
+There is also possibility to run ttmux with configuration file as parameter
 
-    $ startmux filename.startmux
+    $ ttmux filename.ttmux
