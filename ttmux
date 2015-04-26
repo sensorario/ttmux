@@ -24,25 +24,31 @@ else
     echo "${information}Retrieving local information ...${reset}"
     if [[ -n $(ls *.ttmux) ]]; then
         echo "${information}Configuration files found${reset}"
+        found=$(ls -l *.ttmux|wc -l)
     else
         echo "${alert}No configuration available in folder $PWD${reset}"
         exit
     fi
 
-    echo "${information}Select your configuration file here${reset}"
-    select filename in `ls *.ttmux`
-    do
-        echo $filename
-        if [ -f "$filename" ]; then
-            echo ""
-            echo "Loading $filename file"
-            . $filename
-            break
-        else
-            echo ""
-            echo "Invalid selection"
-        fi
-    done
+    if [ $found == 1 ]; then
+        filename=$(ls *.ttmux)
+        . $filename
+    else
+        echo "${information}Select your configuration file here${reset}"
+        select filename in `ls *.ttmux`
+        do
+            echo $filename
+            if [ -f "$filename" ]; then
+                echo ""
+                echo "Loading $filename file"
+                . $filename
+                break
+            else
+                echo ""
+                echo "Invalid selection"
+            fi
+        done
+    fi
 fi
 
 
