@@ -30,10 +30,16 @@ else
         exit
     fi
 
+    configurationLoaded=0
     if [ $found == 1 ]; then
         filename=$(ls *.ttmux)
-        . $filename
-    else
+        if [ -f "$filename" ]; then
+            . $filename
+            configurationLoaded=1
+        fi
+    fi
+
+    if [ $configurationLoaded == 0 ]; then
         echo "${information}Select your configuration file here${reset}"
         select filename in `ls *.ttmux`
         do
