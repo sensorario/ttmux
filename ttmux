@@ -24,35 +24,42 @@ else
     echo "${information}Retrieving local information ...${reset}"
     if [[ -n $(ls *.ttmux) ]]; then
         echo "${information}Configuration files found${reset}"
+        found=$(ls -l *.ttmux|wc -l)
     else
         echo "${alert}No configuration available in folder $PWD${reset}"
         exit
     fi
 
-    echo "${information}Select your configuration file here${reset}"
-    select filename in `ls *.ttmux`
-    do
-        echo $filename
-        if [ -f "$filename" ]; then
-            echo ""
-            echo "Loading $filename file"
-            . $filename
-            break
-        else
-            echo ""
-            echo "Invalid selection"
-        fi
-    done
+    if [ $found == 1 ]; then
+        filename=$(ls *.ttmux)
+        . $filename
+    else
+        echo "${information}Select your configuration file here${reset}"
+        select filename in `ls *.ttmux`
+        do
+            echo $filename
+            if [ -f "$filename" ]; then
+                echo ""
+                echo "Loading $filename file"
+                . $filename
+                break
+            else
+                echo ""
+                echo "Invalid selection"
+            fi
+        done
+    fi
 fi
 
 
 tmux start-server
-windownumber=0
+start=1
+windownumber=$start
 if [ -z "$order" ]; then windows=${!combo[@]}; else windows=${order[@]}; fi
 for window in $windows; do
     name=${window}
     command=${combo[$window]}
-    if [ $((windownumber)) == 0 ]; then
+    if [ $((windownumber)) == $start ]; then
         tmux new-session -d -s startmux -n "${name}"
     else
         tmux new-window -tstartmux:$windownumber -n "${name}"
@@ -60,5 +67,5 @@ for window in $windows; do
     tmux send-keys -tstartmux:$windownumber "${command}" C-m
     ((windownumber++))
 done
-tmux select-window -tstartmux:0
+tmux select-window -tstartmux:$start
 tmux attach-session -d -tstartmux
