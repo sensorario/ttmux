@@ -1,6 +1,23 @@
 #!/bin/bash
 clear
 
+echo ""
+echo "You are loading default configuration"
+echo ""
+echo "    __    __"
+echo "  _/  |__/  |_  _____  __ _____  ___ "
+echo "  \   __\   __\/     \|  |  \  \/  / "
+echo "   |  |  |  | |  Y Y  \  |  />    <  "
+echo "   |__|  |__| |__|_|  /____//__/\_ \ "
+echo "                    \/            \/ "
+echo ""
+echo "http://www.network-science.de/ascii/ "
+
+sleep 1
+echo ""
+echo "The winter is coming"
+sleep 1
+
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
     TARGET="$(readlink "$SOURCE")"
