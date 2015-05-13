@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function ensure_tmux_is_installed {
+    echo "${information}Retrieving local information ...${reset}"
+    if [[ -n $(which tmux) ]]; then
+        echo "${information}Tmux is installed in your system${reset}"
+    else
+        echo "${alert}Tmux is not installed${reset}"
+        echo "${information}run apt-get install tmux${reset}"
+        exit
+    fi
+}
+
+function show_ttmux_files {
+    ls -l *.ttmux
+    echo ""
+}
+
+function ttmux_header {
+    clear
+    echo ""
+    echo "You are loading default configuration"
+    echo "                                     "
+    echo "    __    __                         "
+    echo "  _/  |__/  |_  _____  __ _____  ___ "
+    echo "  \   __\   __\/     \|  |  \  \/  / "
+    echo "   |  |  |  | |  Y Y  \  |  />    <  "
+    echo "   |__|  |__| |__|_|  /____//__/\_ \ "
+    echo "                    \/            \/ "
+    echo ""
+    echo "http://www.network-science.de/ascii/ "
+    echo ""
+}

@@ -1,23 +1,4 @@
 #!/bin/bash
-clear
-
-echo ""
-echo "You are loading default configuration"
-echo ""
-echo "    __    __"
-echo "  _/  |__/  |_  _____  __ _____  ___ "
-echo "  \   __\   __\/     \|  |  \  \/  / "
-echo "   |  |  |  | |  Y Y  \  |  />    <  "
-echo "   |__|  |__| |__|_|  /____//__/\_ \ "
-echo "                    \/            \/ "
-echo ""
-echo "http://www.network-science.de/ascii/ "
-
-sleep 1
-echo ""
-echo "The winter is coming"
-sleep 1
-
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
     TARGET="$(readlink "$SOURCE")"
@@ -32,7 +13,16 @@ RDIR="$( dirname "$SOURCE" )"
 ttmux="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 . $ttmux/"lib/colors"
-. $ttmux/"lib/check_tmux_installation"
+. $ttmux/"lib/utils"
+
+ensure_tmux_is_installed
+ttmux_header
+
+argument=$1
+if [ $1 == '-l' ]; then
+    show_ttmux_files
+    exit
+fi
 
 if [ -f "$1" ]; then
     echo "${information}Configuration sent via parameters${reset}"
