@@ -62,5 +62,12 @@ In some scenario, I need an additional vertical pane, maybe to see phplog or som
     declare -A panes=()
     panes+=([ultimate]=)
 
+## Send a command to a pane
+
+If we have a pane defined in panes array, we can also define a command to send. This allow us, for example, to open a window with a pane, with php log in tail on the left
+
+    declare -A command=()
+    command+=([ultimate]="tail -f /var/log/php.log")
+
 
 
