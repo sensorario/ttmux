@@ -78,6 +78,9 @@ for window in $windows; do
         tmux new-window -tstartmux:$windownumber -n "${name}"
     fi
     tmux send-keys -tstartmux:$windownumber "${command}" C-m
+    if [ -n "${panes[$name]+1}" ]; then
+        tmux splitw -h -p 40 -tstartmux:$windownumber
+    fi
     ((windownumber++))
 done
 tmux select-window -tstartmux:$start

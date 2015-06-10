@@ -43,3 +43,24 @@ To make ttmux executable from everywhere, add a symbolic link your /usr/local/bi
 There is also possibility to run ttmux with configuration file as parameter
 
     $ ttmux filename.ttmux
+
+## Configure ttmux to open windows in same branch
+
+This is good. Because I can configure 7/8 different windows and open all of them in the same branch.
+
+    #!/bin/bash
+    branch='master'
+    declare -A combo=()
+    combo+=([legacy]="cd /path/to/folder; git checkout ${branch}; clear; pwd")
+    combo+=([ultimate]="cd /path/to/another/folder; git checkout ${branch}; clear; pwd")
+    order=( legacy ultimate )
+
+## How to split a pane vertically
+
+In some scenario, I need an additional vertical pane, maybe to see phplog or something like that. Add an additional pane on ttmux is easy: we need to add an associative array with only the name of the window name.
+
+    declare -A panes=()
+    panes+=([ultimate]=)
+
+
+
