@@ -19,7 +19,7 @@ ensure_tmux_is_installed
 ttmux_header
 
 argument=$1
-if [ $1 == '-l' ]; then
+if [[ $1 == "-l" ]]; then
     show_ttmux_files
     exit
 fi
