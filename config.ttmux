@@ -1,10 +1,25 @@
 #!/bin/bash
 
+
 echo ""
 echo "You are loading default configuration"
 
+
+# This aims to define all available windows
 declare -A combo=()
 combo+=([logs]='cd /var/log; clear; pwd')
 combo+=([home]='cd ~; clear; pwd')
 
+
+# This aims to tell that home window has additional pane
+declare -A panes=()
+panes+=([home]=)
+
+
+# And this aims to run a command in home additional pane
+declare -A command=()
+command+=([home]="tail -f /var/log/php.log")
+
+
+# Finally, this tells to ttmux to open home and logs windows
 order=(home logs)
