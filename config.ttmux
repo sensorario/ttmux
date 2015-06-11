@@ -1,25 +1,25 @@
 #!/bin/bash
 
-
-echo ""
-echo "You are loading default configuration"
-
+session_name="ttmux"
 
 # This aims to define all available windows
 declare -A combo=()
-combo+=([logs]='cd /var/log; clear; pwd')
-combo+=([home]='cd ~; clear; pwd')
+combo+=([phplog]='cd /var/log; clear; pwd')
+combo+=([workspace]='cd ~; clear; pwd')
 
 
-# This aims to tell that home window has additional pane
-declare -A panes=()
-panes+=([home]=)
+# This aims to tell that workspace window has additional pane
+declare -A vertical_panes=()
+vertical_panes+=([workspace]=)
 
 
-# And this aims to run a command in home additional pane
-declare -A command=()
-command+=([home]="tail -f /var/log/php.log")
+# And this aims to run a pane_command in workspace additional pane
+declare -A pane_command=()
+pane_command+=([workspace]="tail -f /var/log/php.log")
 
+# Position of command in pane
+declare -A command_position=()
+command_position+=([workspace]="2")
 
-# Finally, this tells to ttmux to open home and logs windows
-order=(home logs)
+# Finally, this tells to ttmux to open workspace and phplog windows
+order=(workspace phplog)
