@@ -2,6 +2,11 @@
 
 A script that make easy tmux configuration bootstrap of a project
 
+## Define your session name
+
+    #!/bin/bash
+    session_name="startmux"
+
 ## Add your own custom configuration
 
 To add a custom configuration, it's necessary to create a file with extension .ttmux. When loaded, ttmux select the right file by asking which one the user want to load.

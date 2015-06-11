@@ -73,18 +73,18 @@ for window in $windows; do
     name=${window}
     keys=${combo[$window]}
     if [ $((windownumber)) == $start ]; then
-        tmux new-session -d -s startmux -n "${name}"
+        tmux new-session -d -s "${session_name}" -n "${name}"
     else
-        tmux new-window -tstartmux:$windownumber -n "${name}"
+        tmux new-window -t"${session_name}":$windownumber -n "${name}"
     fi
-    tmux send-keys -tstartmux:$windownumber "${keys}" C-m
+    tmux send-keys -t"${session_name}":$windownumber "${keys}" C-m
     if [ -n "${vertical_panes[$name]+1}" ]; then
         pane_command=${pane_command[$name]}
         command_position=${command_position[$name]}
-        tmux splitw -h -p 40 -tstartmux:$windownumber
-        tmux send-keys -tstartmux:"${windownumber}.${command_position}" "${pane_command}" C-m
+        tmux splitw -h -p 40 -t"${session_name}":$windownumber
+        tmux send-keys -t"${session_name}":"${windownumber}.${command_position}" "${pane_command}" C-m
     fi
     ((windownumber++))
 done
-tmux select-window -tstartmux:$start
-tmux attach-session -d -tstartmux
+tmux select-window -t"${session_name}":$start
+tmux attach-session -d -t"${session_name}"
