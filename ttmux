@@ -19,8 +19,13 @@ ensure_tmux_is_installed
 ttmux_header
 
 argument=$1
+# todo: convert this into a switch statement
 if [[ $1 == "-l" ]]; then
     show_ttmux_files
+    exit
+fi
+if [[ $1 == "-h" ]]; then
+    show_ttmux_help
     exit
 fi
 
