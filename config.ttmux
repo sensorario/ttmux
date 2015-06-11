@@ -3,10 +3,10 @@
 session_name="ttmux"
 
 # This aims to define all available windows
-declare -A combo=()
-combo+=([ttmux]='vim ttmux')
-combo+=([phplog]='cd /var/log; clear; pwd')
-combo+=([workspace]='cd ~; clear; pwd')
+declare -A window_list=()
+window_list+=([ttmux]='vim ttmux')
+window_list+=([phplog]='cd /var/log; clear; pwd')
+window_list+=([workspace]='cd ~; clear; pwd')
 
 
 # This aims to tell that workspace window has additional pane

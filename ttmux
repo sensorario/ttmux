@@ -68,10 +68,10 @@ fi
 tmux start-server
 start=1
 windownumber=$start
-if [ -z "$order" ]; then windows=${!combo[@]}; else windows=${order[@]}; fi
+if [ -z "$order" ]; then windows=${!window_list[@]}; else windows=${order[@]}; fi
 for window in $windows; do
     name=${window}
-    keys=${combo[$window]}
+    keys=${window_list[$window]}
     if [ $((windownumber)) == $start ]; then
         tmux new-session -d -s "${session_name}" -n "${name}"
     else
