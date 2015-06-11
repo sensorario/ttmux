@@ -4,6 +4,7 @@ session_name="ttmux"
 
 # This aims to define all available windows
 declare -A combo=()
+combo+=([ttmux]='vim ttmux')
 combo+=([phplog]='cd /var/log; clear; pwd')
 combo+=([workspace]='cd ~; clear; pwd')
 
@@ -22,4 +23,8 @@ declare -A command_position=()
 command_position+=([workspace]="2")
 
 # Finally, this tells to ttmux to open workspace and phplog windows
-order=(workspace phplog)
+order=(
+    ttmux
+    workspace
+    phplog
+)
