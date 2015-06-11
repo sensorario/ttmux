@@ -69,5 +69,11 @@ If we have a pane defined in panes array, we can also define a command to send. 
     declare -A command=()
     command+=([ultimate]="tail -f /var/log/php.log")
 
+## Specify command pane destination
 
+After we have defined new pane for a window, ... we could need to send a command to a specific pane. That's how is possible to do this in ttmux.
 
+    declare -A pane_command=()
+    declare -A pane_command_position=()
+    pane_command+=([workspace]="tail -f /var/log/php.log")
+    pane_command_position+=([workspace]="2")

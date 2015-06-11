@@ -78,10 +78,11 @@ for window in $windows; do
         tmux new-window -tstartmux:$windownumber -n "${name}"
     fi
     tmux send-keys -tstartmux:$windownumber "${keys}" C-m
-    if [ -n "${panes[$name]+1}" ]; then
-        command=${command[$name]}
+    if [ -n "${vertical_panes[$name]+1}" ]; then
+        pane_command=${pane_command[$name]}
+        command_position=${command_position[$name]}
         tmux splitw -h -p 40 -tstartmux:$windownumber
-        tmux send-keys -tstartmux:$windownumber.2 "${command}" C-m
+        tmux send-keys -tstartmux:"${windownumber}.${command_position}" "${pane_command}" C-m
     fi
     ((windownumber++))
 done
