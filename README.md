@@ -2,7 +2,7 @@
 
 A script that make easy tmux configuration bootstrap of a project
 
-## Instasll ttmux
+## Install ttmux
 
 To make ttmux executable from everywhere, add a symbolic link your /usr/local/bin folder
 
