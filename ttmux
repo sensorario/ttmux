@@ -84,13 +84,24 @@ for window in $windows; do
     else
         tmux new-window -t"${session_name}":$windownumber -n "${name}"
     fi
+
     tmux send-keys -t"${session_name}":$windownumber "${keys}" C-m
+
     if [ -n "${vertical_panes[$name]+1}" ]; then
         pane_command=${pane_command[$name]}
         command_position=${command_position[$name]}
         tmux splitw -h -p 40 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${command_position}" "${pane_command}" C-m
     fi
+
+    if [ -n "${horizontal_panes[$name]+1}" ]; then
+        tmux select-pane -L
+        horizontal_panes_command=${horizontal_panes_command[$name]}
+        horizontal_command_position=${horizontal_command_position[$name]}
+        tmux splitw -v -p 50 -t"${session_name}":$windownumber
+        tmux send-keys -t"${session_name}":"${windownumber}.${horizontal_command_position}" "${horizontal_panes_command}" C-m
+    fi
+
     ((windownumber++))
 done
 tmux select-window -t"${session_name}":$start
