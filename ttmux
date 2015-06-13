@@ -15,8 +15,8 @@ ttmux="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 . $ttmux/"lib/colors"
 . $ttmux/"lib/utils"
 
-ensure_tmux_is_installed
 ttmux_header
+ensure_tmux_is_installed
 
 argument=$1
 # todo: convert this into a switch statement
@@ -47,6 +47,7 @@ else
         filename=$(ls *.ttmux)
         if [ -f "$filename" ]; then
             . $filename
+            ensure_configuration_file_is_ok
             configurationLoaded=1
         fi
     fi
@@ -60,6 +61,7 @@ else
                 echo ""
                 echo "Loading $filename file"
                 . $filename
+                ensure_configuration_file_is_ok
                 break
             else
                 echo ""

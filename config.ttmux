@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Customize your session name
-session_name="ttmux"
-
 # This aims to define all available windows
 declare -A window_list=()
 window_list+=([ttmux]='vim ttmux')
@@ -20,8 +17,8 @@ declare -A pane_command=()
 pane_command+=([workspace]="tail -f /var/log/php.log")
 
 # Position of command in pane
-declare -A command_position=()
-command_position+=([workspace]="2")
+declare -A pane_command_position=()
+pane_command_position+=([workspace]="2")
 
 # Finally, this tells to ttmux to open workspace and phplog windows
 order=(
@@ -29,3 +26,9 @@ order=(
     workspace
     phplog
 )
+
+# Branch name for development
+branch="master"
+
+# Tmux session name
+session_name="ttmux"
