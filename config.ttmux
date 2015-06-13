@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Customize your session name
 session_name="ttmux"
 
 # This aims to define all available windows
