@@ -30,24 +30,6 @@ function ensure_configuration_file_is_ok {
         echo ""
         exit
     fi
-    if [[ 0 = ${#vertical_panes[@]} ]]; then
-        echo ""
-        echo "    ${alert}vertical_panes is not defined inside configuration file${reset}"
-        echo ""
-        exit
-    fi
-    if [[ 0 = ${#pane_command[@]} ]]; then
-        echo ""
-        echo "    ${alert}pane_command is not defined inside configuration file${reset}"
-        echo ""
-        exit
-    fi
-    if [[ 0 = ${#pane_command_position[@]} ]]; then
-        echo ""
-        echo "    ${alert}pane_command_position is not defined inside configuration file${reset}"
-        echo ""
-        exit
-    fi
     if [[ 0 = ${#order[@]} ]]; then
         echo ""
         echo "    ${alert}order is not defined inside configuration file${reset}"
