@@ -1,5 +1,7 @@
 #!/bin/bash
 
+declare -A horizontal_panes=()
+
 # This aims to define all available windows
 declare -A window_list=()
 window_list+=([ttmux]='vim ttmux')
