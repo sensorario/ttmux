@@ -94,10 +94,11 @@ for window in $windows; do
         tmux send-keys -t"${session_name}":"${windownumber}.${vertical_panes_command_position}" "${vertical_panes_command}" C-m
     fi
 
+
     if [ -n "${horizontal_panes[$name]+1}" ]; then
-        tmux select-pane -L
         horizontal_panes_command=${horizontal_panes_command[$name]}
         horizontal_panes_command_position=${horizontal_panes_command_position[$name]}
+        tmux select-pane -L
         tmux splitw -v -p 50 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${horizontal_panes_command_position}" "${horizontal_panes_command}" C-m
     fi
