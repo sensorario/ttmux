@@ -18,7 +18,7 @@ function ensure_configuration_file_is_ok {
         echo ""
         exit
     fi
-    if [[ -z ${horizontal_panes+x} ]]; then
+    if [[ -z ${#horizontal_panes[@]+x} ]]; then
         echo ""
         echo "    ${alert}horizontal_panes is not defined inside configuration file${reset}"
         echo "    ${information}declare -A horizontal_panes=()${reset}"
