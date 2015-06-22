@@ -72,6 +72,15 @@ else
 fi
 
 
+tmux has-session -t ${session_name} 2>/dev/null
+if [ "$?" -eq 1 ] ; then
+    echo "${information}Session not found${reset}"
+else
+    echo "${alert}Session found${reset}"
+    exit
+fi
+
+
 tmux start-server
 start=1
 windownumber=$start
