@@ -23,7 +23,7 @@ declare -A pane_command_position=()
 pane_command_position+=([workspace]="2")
 
 # Finally, this tells to ttmux to open workspace and phplog windows
-order=(
+ordered_windows=(
     ttmux
     workspace
     phplog
