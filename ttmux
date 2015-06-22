@@ -75,7 +75,7 @@ fi
 tmux start-server
 start=1
 windownumber=$start
-if [ -z "$order" ]; then windows=${!window_list[@]}; else windows=${order[@]}; fi
+if [ -z "$ordered_windows" ]; then windows=${!window_list[@]}; else windows=${ordered_windows[@]}; fi
 for window in $windows; do
     name=${window}
     keys=${window_list[$window]}

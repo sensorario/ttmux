@@ -37,9 +37,9 @@ function ensure_configuration_file_is_ok {
         echo ""
         exit
     fi
-    if [[ 0 = ${#order[@]} ]]; then
+    if [[ 0 = ${#ordered_windows[@]} ]]; then
         echo ""
-        echo "    ${alert}order is not defined inside configuration file${reset}"
+        echo "    ${alert}ordered_windows is not defined inside configuration file${reset}"
         echo ""
         exit
     fi
