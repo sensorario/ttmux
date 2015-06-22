@@ -1,36 +1,35 @@
 #!/bin/bash
 
 declare -A horizontal_panes=()
-
-# This aims to define all available windows
 declare -A window_list=()
+declare -A vertical_panes=()
+declare -A pane_command=()
+declare -A pane_command_position=()
+
+repositories=(
+    ~/Development/sensorario/ttmux
+)
+
+branch="master"
+
+session_name="ttmux"
+
 window_list+=([ttmux]='vim ttmux')
 window_list+=([phplog]='cd /var/log; clear; pwd')
 window_list+=([workspace]='cd ~; clear; pwd')
 
-
-# This aims to tell that workspace window has additional pane
-declare -A vertical_panes=()
 vertical_panes+=([workspace]=)
 
-
-# And this aims to run a pane_command in workspace additional pane
-declare -A pane_command=()
 pane_command+=([workspace]="tail -f /var/log/php.log")
 
-# Position of command in pane
-declare -A pane_command_position=()
 pane_command_position+=([workspace]="2")
 
-# Finally, this tells to ttmux to open workspace and phplog windows
+horizontal_panes+=([workspace]=)
+horizontal_panes_command+=([workspace]="vim config.ttmux")
+horizontal_panes_command_position+=([workspace]="2")
+
 ordered_windows=(
-    ttmux
     workspace
+    ttmux
     phplog
 )
-
-# Branch name for development
-branch="master"
-
-# Tmux session name
-session_name="ttmux"

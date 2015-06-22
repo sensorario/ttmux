@@ -43,6 +43,12 @@ function ensure_configuration_file_is_ok {
         echo ""
         exit
     fi
+    if [[ 0 = ${#repositories[@]} ]]; then
+        echo ""
+        echo "    ${alert}repositories is not defined inside configuration file${reset}"
+        echo ""
+        exit
+    fi
 }
 
 function show_ttmux_files {
