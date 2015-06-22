@@ -16,7 +16,7 @@ session_name="ttmux"
 
 window_list+=([ttmux]='vim ttmux')
 window_list+=([phplog]='cd /var/log; clear; pwd')
-window_list+=([workspace]='cd ~; clear; pwd')
+window_list+=([workspace]='cd ~/Development/sensorario/ttmux; clear; pwd')
 
 vertical_panes+=([workspace]=)
 

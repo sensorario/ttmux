@@ -71,6 +71,28 @@ else
     fi
 fi
 
+contatore=0
+for repo in "${repositories[@]}"
+do
+    echo ""
+    echo -ne '##### go to repo folder   (33%)\r'
+    cd "${repo}"
+    echo -ne '######FETch origin        (55%)\r'
+    fatch=`git fetch origin | wc -l`
+    echo -ne '######CHECK Branch name   (66%)\r'
+    repo=`git symbolic-ref HEAD | sed -e "s/^refs\/heads\///"`
+    if [ $repo != 'master' ]; then
+        echo -ne '######CHECKOUT master     (77%)\r'
+        checkout=`git checkout master | wc -l`
+    fi
+    echo -ne '######FETCH ORIGIN##      (88%)\r'
+    fatch=`git fetch origin | wc -l`
+    echo -ne '######PULL ORIGIN MASTEr  (99%)\r'
+    pull=`git pull origin master | wc -l`
+    echo -ne '######################### (100%)\r'
+    echo -ne '\n'
+done
+
 
 tmux has-session -t ${session_name} 2>/dev/null
 if [ "$?" -eq 1 ] ; then
@@ -99,6 +121,7 @@ for window in $windows; do
     if [ -n "${vertical_panes[$name]+1}" ]; then
         vertical_panes_command=${vertical_panes_command[$name]}
         vertical_panes_command_position=${vertical_panes_command_position[$name]}
+
         tmux splitw -h -p 40 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${vertical_panes_command_position}" "${vertical_panes_command}" C-m
     fi
@@ -107,6 +130,7 @@ for window in $windows; do
     if [ -n "${horizontal_panes[$name]+1}" ]; then
         horizontal_panes_command=${horizontal_panes_command[$name]}
         horizontal_panes_command_position=${horizontal_panes_command_position[$name]}
+
         tmux select-pane -L
         tmux splitw -v -p 50 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${horizontal_panes_command_position}" "${horizontal_panes_command}" C-m
