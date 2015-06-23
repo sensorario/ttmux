@@ -92,6 +92,7 @@ do
     echo -ne '######PULL ORIGIN MASTEr  (99%)\r'
     pull=`git pull origin master | wc -l`
     echo -ne '######################### (100%)\r'
+    pull=`git checkout ${branch}`
     echo -ne '\n'
 done
 
