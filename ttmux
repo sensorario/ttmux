@@ -71,6 +71,14 @@ else
     fi
 fi
 
+tmux has-session -t ${session_name} 2>/dev/null
+if [ "$?" -eq 1 ] ; then
+    echo "${information}Session not found${reset}"
+else
+    echo "${alert}Session found${reset}"
+    exit
+fi
+
 contatore=0
 for repo in "${repositories[@]}"
 do
@@ -95,16 +103,6 @@ do
     pull=`git checkout ${branch}`
     echo -ne '\n'
 done
-
-
-tmux has-session -t ${session_name} 2>/dev/null
-if [ "$?" -eq 1 ] ; then
-    echo "${information}Session not found${reset}"
-else
-    echo "${alert}Session found${reset}"
-    exit
-fi
-
 
 tmux start-server
 start=1
