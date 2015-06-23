@@ -77,14 +77,16 @@ do
     echo ""
     echo -ne '##### go to repo folder   (33%)\r'
     cd "${repo}"
-    echo -ne '######FETch origin        (55%)\r'
+    echo -ne '######FETch origin        (44%)\r'
     fatch=`git fetch origin | wc -l`
-    echo -ne '######CHECK Branch name   (66%)\r'
+    echo -ne '######CHECK Branch name   (55%)\r'
     repo=`git symbolic-ref HEAD | sed -e "s/^refs\/heads\///"`
     if [ $repo != 'master' ]; then
-        echo -ne '######CHECKOUT master     (77%)\r'
+        echo -ne '######CHECKOUT master     (66%)\r'
         checkout=`git checkout master | wc -l`
     fi
+    echo -ne '######FETCH ORIGIN        (77%)\r'
+    git branch --merged | grep -v master | xargs -n 1 git branch -D
     echo -ne '######FETCH ORIGIN##      (88%)\r'
     fatch=`git fetch origin | wc -l`
     echo -ne '######PULL ORIGIN MASTEr  (99%)\r'
