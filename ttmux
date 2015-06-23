@@ -82,29 +82,78 @@ fi
 contatore=0
 for repo in "${repositories[@]}"
 do
-    echo ""
-    echo -ne '##### go to repo folder   (33%)\r'
-    cd "${repo}"
-    echo -ne '######FETch origin        (44%)\r'
-    fatch=`git fetch origin | wc -l`
-    echo -ne '######CHECK Branch name   (55%)\r'
-    repo=`git symbolic-ref HEAD | sed -e "s/^refs\/heads\///"`
-    if [ $repo != 'master' ]; then
-        echo -ne '######CHECKOUT master     (66%)\r'
-        checkout=`git checkout master | wc -l`
-    fi
-    echo -ne '######FETCH ORIGIN        (77%)\r'
-    git branch --merged | grep -v master | xargs -n 1 git branch -D
-    echo -ne '######FETCH ORIGIN##      (88%)\r'
-    fatch=`git fetch origin | wc -l`
-    echo -ne '######PULL ORIGIN MASTEr  (99%)\r'
-    pull=`git pull origin master | wc -l`
-    echo -ne '######################### (100%)\r'
-    pull=`git checkout ${branch}`
-    echo -ne '\n'
+    # mi sposto nella cartella del repository
+        cd "${repo}"
+
+    # verifico se la working directory e' sporca o meno
+        echo ""
+        echo "${information}Check if current branch needs commit${reset}"
+        needscommit=0
+        git status | grep nothing &> /dev/null
+        if [ $? == 1 ]; then
+            echo ""
+            echo "${information}Needs commit${reset}"
+            needscommit=1
+        else
+            echo ""
+            echo "${information}Dont needs commit${reset}"
+        fi
+
+    # check current branch
+        echo ""
+        echo "${information}Retrieving current branch information ...${reset}"
+        currentBranch=$(git symbolic-ref -q HEAD)
+        currentBranch=${currentBranch##refs/heads/}
+        currentBranch=${currentBranch:-HEAD}
+        echo "${information}Branch is $currentBranch${reset}"
+
+    # action ...
+        if [ $needscommit == 1 ]; then
+            echo "${question}Commit changes in $currentBranch?${reset}"
+            read boolean
+            commitnow='y'
+
+            if [ $boolean == 'n' ]; then
+                echo "${question}Want you commit changes now?${reset}"
+                read commitnow
+                if [ $commitnow == 'y' ]; then
+                    echo "${question}What is the name of new branch?${reset}"
+                    read branchname
+                    git checkout -b $branchname
+                    currentBranch=$branchname
+                fi
+            fi
+
+            if [ $commitnow == 'y' ]; then
+                git add .
+                git commit -av
+            fi
+        fi
+
+        git checkout master
+
+    # update master
+        fatch=`git fetch origin | wc -l`
+        git branch --merged | grep -v master | xargs -n 1 git branch -D
+        fatch=`git fetch origin | wc -l`
+        pull=`git pull origin master | wc -l`
+
+
+    # carico il branch preferito
+        newbranch=()
+        eval "$(git for-each-ref --shell \
+            --format='newbranch+=(%(refname:short))' \
+            refs/heads/)"
+        select newbranch in "${newbranch[@]}"
+        do
+            if [[ "$newbranch" ]]; then
+                git checkout "$newbranch"
+                exit 0
+            fi
+        done
 done
 
-tmux start-server
+tmux atart-server
 start=1
 windownumber=$start
 if [ -z "$ordered_windows" ]; then windows=${!window_list[@]}; else windows=${ordered_windows[@]}; fi
