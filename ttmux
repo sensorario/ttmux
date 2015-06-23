@@ -139,7 +139,7 @@ do
         pull=`git pull origin master | wc -l`
 done
 
-tmux atart-server
+tmux start-server
 start=1
 windownumber=$start
 if [ -z "$ordered_windows" ]; then windows=${!window_list[@]}; else windows=${ordered_windows[@]}; fi
