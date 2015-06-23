@@ -137,20 +137,6 @@ do
         git branch --merged | grep -v master | xargs -n 1 git branch -D
         fatch=`git fetch origin | wc -l`
         pull=`git pull origin master | wc -l`
-
-
-    # carico il branch preferito
-        newbranch=()
-        eval "$(git for-each-ref --shell \
-            --format='newbranch+=(%(refname:short))' \
-            refs/heads/)"
-        select newbranch in "${newbranch[@]}"
-        do
-            if [[ "$newbranch" ]]; then
-                git checkout "$newbranch"
-                exit 0
-            fi
-        done
 done
 
 tmux atart-server
