@@ -93,6 +93,7 @@ do
         if [ $? == 1 ]; then
             echo ""
             echo "${information}Needs commit${reset}"
+            git status
             needscommit=1
         else
             echo ""
@@ -117,27 +118,28 @@ do
                 echo "${question}Want you commit changes now?${reset}"
                 read commitnow
                 if [ $commitnow == 'y' ]; then
-                    echo "${question}What is the name of new branch?${reset}"
-                    read branchname
+                    if [ $branch != $branchname ]; then
+                        echo "${question}What is the name of new branch?${reset}"
+                        read branchname
+                    else
+                        branchname=$branch
+                    fi
                     git checkout -b $branchname
                     currentBranch=$branchname
+                    git add .
+                    git commit -av
                 fi
-            fi
-
-            if [ $commitnow == 'y' ]; then
-                git add .
-                git commit -av
             fi
         fi
 
     # update master
-        fatch=`git fetch origin | wc -l`
-        git branch --merged | grep -v master | xargs -n 1 git branch -D
-        fatch=`git fetch origin | wc -l`
-        pull=`git pull origin master | wc -l`
+    #    fatch=`git fetch origin | wc -l`
+    #    git branch --merged | grep -v master | xargs -n 1 git branch -D
+    #    fatch=`git fetch origin | wc -l`
+    #    pull=`git pull origin master | wc -l`
 
     # go to desired branch
-        git checkout -b ${branch}
+    git checkout ${branch}
 done
 
 tmux start-server

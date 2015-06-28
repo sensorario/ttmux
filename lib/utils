@@ -43,7 +43,7 @@ function ensure_configuration_file_is_ok {
         echo ""
         exit
     fi
-
+}
 
 function show_ttmux_files {
     ls -l *.ttmux
