@@ -76,6 +76,7 @@ if [ "$?" -eq 1 ] ; then
     echo "${information}Session not found${reset}"
 else
     echo "${alert}Session found${reset}"
+    echo "${information}Try `tmux attach`${reset}"
     exit
 fi
 
@@ -161,7 +162,7 @@ for window in $windows; do
         vertical_panes_command=${vertical_panes_command[$name]}
         vertical_panes_command_position=${vertical_panes_command_position[$name]}
 
-        tmux splitw -h -p 40 -t"${session_name}":$windownumber
+        tmux splitw -h -p 20 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${vertical_panes_command_position}" "${vertical_panes_command}" C-m
     fi
 
@@ -171,7 +172,7 @@ for window in $windows; do
         horizontal_panes_command_position=${horizontal_panes_command_position[$name]}
 
         tmux select-pane -L
-        tmux splitw -v -p 50 -t"${session_name}":$windownumber
+        tmux splitw -v -p 20 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${horizontal_panes_command_position}" "${horizontal_panes_command}" C-m
     fi
 
