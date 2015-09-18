@@ -140,6 +140,7 @@ do
     #    pull=`git pull origin master | wc -l`
 
     # go to desired branch
+    printf "Now I'll checkout ${branch}"
     git checkout ${branch}
 done
 
@@ -171,9 +172,9 @@ for window in $windows; do
         horizontal_panes_command=${horizontal_panes_command[$name]}
         horizontal_panes_command_position=${horizontal_panes_command_position[$name]}
 
-        tmux select-pane -L
         tmux splitw -v -p 20 -t"${session_name}":$windownumber
         tmux send-keys -t"${session_name}":"${windownumber}.${horizontal_panes_command_position}" "${horizontal_panes_command}" C-m
+        tmux select-pane -U
     fi
 
     ((windownumber++))
