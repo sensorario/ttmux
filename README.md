@@ -17,25 +17,28 @@ This example create a basic configurtion where, ...
  - session is named "ttmux"
  - workspace windows will have a 20% pane, on the bottom
 
-    declare -A window_list=()
-    declare -A horizontal_panes=()
-    declare -A horizontal_panes_command=()
-    declare -A horizontal_panes_command_position=()
 
-    branch="master"
+```bash
+declare -A window_list=()
+declare -A horizontal_panes=()
+declare -A horizontal_panes_command=()
+declare -A horizontal_panes_command_position=()
 
-    session_name="ttmux"
+branch="master"
 
-    window_list+=([workspace]="cd ~/Development/sensorario/ttmux; vim")
-    window_list+=([mysql]="mysql -uroot sensorario")
-    window_list+=([console]="cd ~/Development/sensorario/dotfiles")
+session_name="ttmux"
 
-    horizontal_panes+=([workspace]="")
-    horizontal_panes_command+=([workspace]="")
-    horizontal_panes_command_position+=([workspace]=2)
+window_list+=([workspace]="cd ~/Development/sensorario/ttmux; vim")
+window_list+=([mysql]="mysql -uroot sensorario")
+window_list+=([console]="cd ~/Development/sensorario/dotfiles")
 
-    ordered_windows=(
-        workspace
-        mysql
-        console
-    )
+horizontal_panes+=([workspace]="")
+horizontal_panes_command+=([workspace]="")
+horizontal_panes_command_position+=([workspace]=2)
+
+ordered_windows=(
+    workspace
+    mysql
+    console
+)
+```
