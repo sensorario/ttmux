@@ -51,19 +51,29 @@ function show_ttmux_files {
 }
 
 function ttmux_header {
+
     clear
+
     echo ""
-    echo "You are loading default configuration"
-    echo "                                     "
-    echo "    __    __                         "
-    echo "  _/  |__/  |_  _____  __ _____  ___ "
-    echo "  \   __\   __\/     \|  |  \  \/  / "
-    echo "   |  |  |  | |  Y Y  \  |  />    <  "
-    echo "   |__|  |__| |__|_|  /____//__/\_ \ "
-    echo "                    \/            \/ "
+
+    if [[ -n $(which figlet) ]]; then
+        figlet ttmux-alfa
+    else
+        echo "You are loading default configuration"
+        echo "                                     "
+        echo "    __    __                         "
+        echo "  _/  |__/  |_  _____  __ _____  ___ "
+        echo "  \   __\   __\/     \|  |  \  \/  / "
+        echo "   |  |  |  | |  Y Y  \  |  />    <  "
+        echo "   |__|  |__| |__|_|  /____//__/\_ \ "
+        echo "                    \/            \/ "
+        echo ""
+        echo "http://www.network-science.de/ascii/ "
+        echo ""
+    fi
+
     echo ""
-    echo "http://www.network-science.de/ascii/ "
-    echo ""
+
 }
 
 function show_ttmux_help {
