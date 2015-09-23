@@ -1,13 +1,13 @@
 #!/bin/bash
 
+clear
+
 {
     declare -A fake_declaration=()
 } || {
-    clear
     printf "\n\n\nttmux cannot work in this bash version\n\n"
     exit
 }
-
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
