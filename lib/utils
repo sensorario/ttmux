@@ -12,12 +12,6 @@ function ensure_tmux_is_installed {
 }
 
 function ensure_configuration_file_is_ok {
-    if [[ -z ${branch+x} ]]; then
-        echo ""
-        echo "    ${alert}branch is not defined inside configuration file${reset}"
-        echo ""
-        exit
-    fi
     if [[ -z ${#horizontal_panes[@]+x} ]]; then
         echo ""
         echo "    ${alert}horizontal_panes is not defined inside configuration file${reset}"
