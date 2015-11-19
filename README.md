@@ -24,13 +24,12 @@ declare -A horizontal_panes=()
 declare -A horizontal_panes_command=()
 declare -A horizontal_panes_command_position=()
 
-branch="master"
-
 session_name="ttmux"
+project_path='/path/to/project/folder'
 
-window_list+=([workspace]="cd ~/Development/sensorario/ttmux; vim")
+window_list+=([workspace]="cd $project_path; vim")
 window_list+=([mysql]="mysql -uroot sensorario")
-window_list+=([console]="cd ~/Development/sensorario/dotfiles")
+window_list+=([console]="cd $project_path")
 
 horizontal_panes+=([workspace]="")
 horizontal_panes_command+=([workspace]="")
