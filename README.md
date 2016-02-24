@@ -9,14 +9,23 @@ To make ttmux executable from everywhere, add a symbolic link your /usr/local/bi
     # cd /usr/local/bin
     # ln -s ~/path/to/sensorario/ttmux/ttmux .
 
-## configuration example
+## tmux configuration
+
+Add these lines to your tmux.conf file, ore create it if not exists.
+
+```bash
+# start windows and panes at 1, not 0
+set -g base-index 1
+set -g pane-base-index 1
+```
+
+## configuration
 
 This example create a basic configurtion where, ...
 
  - github checkout master branch
  - session is named "ttmux"
  - workspace windows will have a 20% pane, on the bottom
-
 
 ```bash
 declare -A window_list=()
