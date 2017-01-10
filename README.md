@@ -50,3 +50,8 @@ ordered_windows=(
     console
 )
 ```
+
+## `Tmux snippets`
+
+ - open horizontal pane `Ctrl-b + "`
+ - open vertical pane `Ctrl-b + %`
