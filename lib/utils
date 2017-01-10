@@ -58,7 +58,7 @@ function ttmux_header {
     echo ""
 
     if [[ -n $(which figlet) ]]; then
-        figlet ttmux-alfa
+        figlet ttmux-1.0
     else
         echo "You are loading default configuration"
         echo "                                     "
